@@ -1,79 +1,102 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capital Hub</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f5f7fb;color:#18202a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:30px}
-header{background:#111827;color:#fff;padding:22px 18px 20px;border-radius:0 0 24px 24px}
-.top{display:flex;justify-content:space-between;align-items:center}
-.brand{font-size:21px;font-weight:700}.date{font-size:12px;opacity:.65}
-.label{font-size:11px;opacity:.7;margin-top:22px}.total{font-size:36px;font-weight:800;margin-top:4px}
-.badge{display:inline-block;margin-top:7px;padding:5px 9px;border-radius:20px;background:#202938;color:#9fe6bb;font-size:11px}
-main{padding:16px}.title{font-size:15px;font-weight:700;margin:4px 2px 10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{background:#fff;border:1px solid #e8ebf0;border-radius:17px;padding:14px;box-shadow:0 2px 8px rgba(20,30,50,.035)}
-.small{font-size:11px;color:#78818d}.value{font-size:20px;font-weight:750;margin-top:5px}.sub{font-size:11px;color:#7d8792;margin-top:4px}
-.module{margin-top:18px}.head{display:flex;justify-content:space-between;align-items:center}
-.link{font-size:11px;color:#5966f2}
-.row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #edf0f4}
-.row:last-child{border:0}.left{display:flex;gap:10px;align-items:center}
-.icon{width:34px;height:34px;border-radius:11px;background:#eef1f7;display:grid;place-items:center}
-.name{font-size:13px;font-weight:650}.muted{font-size:11px;color:#8a929d;margin-top:2px}
-.right{text-align:right;font-size:13px;font-weight:700}
-.chart{height:135px;display:flex;align-items:flex-end;gap:8px;padding:12px 4px 4px}
-.bar{flex:1;background:#d8deea;border-radius:7px 7px 3px 3px}.bar.active{background:#5966f2}
-.months{display:flex;justify-content:space-between;color:#8a929d;font-size:9px}
-.note{font-size:10px;color:#8a929d;line-height:1.45;margin-top:14px}
+body{margin:0;background:#f4f6f8;color:#172033;font-family:Arial,sans-serif}
+.wrap{max-width:520px;margin:auto;padding-bottom:30px}
+.hero{background:#111827;color:white;border-radius:0 0 30px 30px;padding:28px 18px 24px}
+.brand{font-size:20px;font-weight:700;margin-bottom:28px}
+.date{float:right;font-size:13px;font-weight:400;color:#cbd5e1}
+.label{font-size:12px;color:#cbd5e1;letter-spacing:.3px}
+.total{font-size:38px;font-weight:800;margin:8px 0}
+.badge{display:inline-block;background:#243044;color:#b7f7ce;border-radius:20px;padding:6px 10px;font-size:12px}
+.section{padding:20px 16px 0}
+.section h2{font-size:16px;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:white;border-radius:18px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.card .small{font-size:12px;color:#64748b}
+.card .value{font-size:21px;font-weight:700;margin:7px 0 3px}
+.card .sub{font-size:11px;color:#64748b}
+.list{background:white;border-radius:18px;padding:4px 14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid #e5e7eb}
+.row:last-child{border-bottom:0}
+.left{display:flex;align-items:center;gap:10px}
+.icon{width:34px;height:34px;border-radius:10px;background:#eef2f7;display:flex;align-items:center;justify-content:center;font-weight:700}
+.name{font-size:13px;font-weight:700}
+.sub2{font-size:11px;color:#64748b;margin-top:3px}
+.amount{font-size:14px;font-weight:700}
+#status{font-size:11px;color:#64748b;text-align:center;margin-top:14px}
 </style>
 </head>
 <body>
-<div class="app">
-<header>
-<div class="top"><div class="brand">Capital Hub</div><div class="date">Oct 2026</div></div>
-<div class="label">PATRIMONIO CIRCULANTE</div>
-<div class="total">65,870.14 USDT</div>
-<div class="badge">● Consolidado</div>
-</header>
+<div class="wrap">
+  <div class="hero">
+    <div class="brand">Capital Hub <span class="date">Oct 2026</span></div>
+    <div class="label">PATRIMONIO CIRCULANTE</div>
+    <div class="total" id="patrimonio">Cargando...</div>
+    <div class="badge">● Consolidado</div>
+  </div>
 
-<main>
-<div class="title">Saldos unificados</div>
-<div class="grid">
-<div class="card"><div class="small">USDT</div><div class="value">243.00</div><div class="sub">Binance</div></div>
-<div class="card"><div class="small">USD efectivo</div><div class="value">15,306</div><div class="sub">físico</div></div>
-<div class="card"><div class="small">CLP</div><div class="value">41.99 M</div><div class="sub">Buda + banco</div></div>
-<div class="card"><div class="small">BS</div><div class="value">284,249.74</div><div class="sub">operativo</div></div>
-</div>
+  <div class="section">
+    <h2>Saldos unificados</h2>
+    <div class="grid">
+      <div class="card"><div class="small">USDT</div><div class="value" id="binance">—</div><div class="sub">Binance</div></div>
+      <div class="card"><div class="small">USD efectivo</div><div class="value" id="efectivo">—</div><div class="sub">físico</div></div>
+      <div class="card"><div class="small">CLP</div><div class="value" id="clp">—</div><div class="sub">Buda + banco</div></div>
+      <div class="card"><div class="small">BS</div><div class="value" id="bs">—</div><div class="sub">operativo</div></div>
+    </div>
+  </div>
 
-<div class="module">
-<div class="head"><div class="title">Distribución del patrimonio</div><div class="link">USDT</div></div>
-<div class="card">
-<div class="row"><div class="left"><div class="icon">₮</div><div><div class="name">Binance</div><div class="muted">USDT</div></div></div><div class="right">243.00</div></div>
-<div class="row"><div class="left"><div class="icon">$</div><div><div class="name">Buda</div><div class="muted">CLP</div></div></div><div class="right">40,082.54</div></div>
-<div class="row"><div class="left"><div class="icon">$</div><div><div class="name">Banco</div><div class="muted">CLP</div></div></div><div class="right">2,941.66</div></div>
-<div class="row"><div class="left"><div class="icon">$</div><div><div class="name">USD efectivo</div><div class="muted">USD × 1.05</div></div></div><div class="right">16,071.30</div></div>
-<div class="row"><div class="left"><div class="icon">Z</div><div><div class="name">Zelle</div><div class="muted">USD × 1.07</div></div></div><div class="right">6,244.52</div></div>
-<div class="row"><div class="left"><div class="icon">Bs</div><div><div class="name">BS</div><div class="muted">BS ÷ 990</div></div></div><div class="right">287.12</div></div>
-</div>
-</div>
-
-<div class="module">
-<div class="head"><div class="title">Objetivo</div><div class="link">100K USDT</div></div>
-<div class="card">
-<div class="small">Progreso hacia 100,000 USDT</div>
-<div class="value">65.9%</div>
-<div style="height:9px;background:#edf0f4;border-radius:9px;margin-top:10px;overflow:hidden">
-<div style="height:100%;width:65.87%;background:#5966f2;border-radius:9px"></div>
-</div>
-<div class="sub">Faltan 34,129.86 USDT</div>
-</div>
+  <div class="section">
+    <h2>Distribución del patrimonio <span style="float:right;color:#4f46e5;font-size:11px">USDT</span></h2>
+    <div class="list">
+      <div class="row"><div class="left"><div class="icon">₮</div><div><div class="name">Binance</div><div class="sub2">USDT</div></div></div><div class="amount" id="d_binance">—</div></div>
+      <div class="row"><div class="left"><div class="icon">$</div><div><div class="name">Buda</div><div class="sub2">CLP</div></div></div><div class="amount" id="d_buda">—</div></div>
+      <div class="row"><div class="left"><div class="icon">$</div><div><div class="name">Banco</div><div class="sub2">CLP</div></div></div><div class="amount" id="d_banco">—</div></div>
+      <div class="row"><div class="left"><div class="icon">$</div><div><div class="name">USD efectivo</div><div class="sub2">USD × 1.05</div></div></div><div class="amount" id="d_efectivo">—</div></div>
+      <div class="row"><div class="left"><div class="icon">Z</div><div><div class="name">Zelle</div><div class="sub2">USD × 1.07</div></div></div><div class="amount" id="d_zelle">—</div></div>
+      <div class="row"><div class="left"><div class="icon">BS</div><div><div class="name">BS</div><div class="sub2">BS ÷ 990</div></div></div><div class="amount" id="d_bs">—</div></div>
+    </div>
+    <div id="status">Conectando...</div>
+  </div>
 </div>
 
-<div class="note">Vista inicial. Los saldos mostrados son de referencia y posteriormente serán alimentados automáticamente desde tus fuentes reales.</div>
-</main>
-</div>
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbym5rU5s5J6-gRC_t3kLy5DLlLI0NhbQVUedHEqCLpd4pROaoUvuD5ew3gL_jT0EDBr/exec';
+
+const fmt = (n, decimals=2) =>
+  Number(n).toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
+
+async function cargarDatos(){
+  try{
+    const r = await fetch(API_URL + "?t=" + Date.now());
+    const d = await r.json();
+
+    document.getElementById("patrimonio").textContent = fmt(d.patrimonio_usdt) + " USDT";
+    document.getElementById("binance").textContent = fmt(d.binance_usdt);
+    document.getElementById("efectivo").textContent = fmt(d.efectivo_usd,0);
+    document.getElementById("clp").textContent = fmt((d.buda_clp+d.banco_clp)/1000000,2) + " M";
+    document.getElementById("bs").textContent = fmt(d.bs);
+
+    document.getElementById("d_binance").textContent = fmt(d.binance_usdt);
+    document.getElementById("d_buda").textContent = fmt(d.buda_clp/977);
+    document.getElementById("d_banco").textContent = fmt(d.banco_clp/977);
+    document.getElementById("d_efectivo").textContent = fmt(d.efectivo_usd*1.05);
+    document.getElementById("d_zelle").textContent = fmt(d.zelle_usd*1.07);
+    document.getElementById("d_bs").textContent = fmt(d.bs/990);
+
+    document.getElementById("status").textContent =
+      "Actualizado: " + new Date().toLocaleTimeString('es-CL');
+  }catch(e){
+    document.getElementById("status").textContent = "No se pudo actualizar";
+  }
+}
+cargarDatos();
+setInterval(cargarDatos,60000);
+</script>
 </body>
 </html>
