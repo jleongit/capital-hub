@@ -29,7 +29,12 @@ body{margin:0;background:#f4f6f8;color:#172033;font-family:Arial,sans-serif}
 .name{font-size:13px;font-weight:700}
 .sub2{font-size:11px;color:#64748b;margin-top:3px}
 .amount{font-size:14px;font-weight:700}
-#status{font-size:11px;color:#64748b;text-align:center;margin-top:14px}
+.arb-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.arb-card{background:white;border-radius:18px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.arb-card .tag{font-size:11px;color:#64748b}
+.arb-card .num{font-size:20px;font-weight:750;margin-top:7px}
+.arb-card .hint{font-size:10px;color:#64748b;margin-top:4px}
+.status{text-align:center;font-size:11px;color:#64748b;margin-top:14px}
 </style>
 </head>
 <body>
@@ -61,13 +66,26 @@ body{margin:0;background:#f4f6f8;color:#172033;font-family:Arial,sans-serif}
       <div class="row"><div class="left"><div class="icon">Z</div><div><div class="name">Zelle</div><div class="sub2">USD × 1.07</div></div></div><div class="amount" id="d_zelle">—</div></div>
       <div class="row"><div class="left"><div class="icon">BS</div><div><div class="name">BS</div><div class="sub2">BS ÷ 990</div></div></div><div class="amount" id="d_bs">—</div></div>
     </div>
-    <div id="status">Conectando...</div>
+  </div>
+
+  <div class="section">
+    <h2>Arbitraje</h2>
+    <div class="arb-grid">
+      <div class="arb-card"><div class="tag">Capital abierto</div><div class="num" id="arb_abierto">—</div><div class="hint">USDT</div></div>
+      <div class="arb-card"><div class="tag">Financiamiento</div><div class="num" id="arb_fin">—</div><div class="hint">USDT</div></div>
+      <div class="arb-card"><div class="tag">Ganancia realizada</div><div class="num" id="arb_gain">—</div><div class="hint">USDT</div></div>
+      <div class="arb-card"><div class="tag">USDT vendidos</div><div class="num" id="arb_sold">—</div><div class="hint">acumulado</div></div>
+      <div class="arb-card"><div class="tag">USDT recomprados</div><div class="num" id="arb_bought">—</div><div class="hint">acumulado</div></div>
+      <div class="arb-card"><div class="tag">Volumen operado</div><div class="num" id="arb_volume">—</div><div class="hint">USDT</div></div>
+      <div class="arb-card"><div class="tag">Spread CLP</div><div class="num" id="arb_spread_clp">—</div><div class="hint">CLP/USDT</div></div>
+      <div class="arb-card"><div class="tag">Spread BS</div><div class="num" id="arb_spread_bs">—</div><div class="hint">BS/USDT</div></div>
+    </div>
+    <div class="status" id="status">Conectando...</div>
   </div>
 </div>
 
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbym5rU5s5J6-gRC_t3kLy5DLlLI0NhbQVUedHEqCLpd4pROaoUvuD5ew3gL_jT0EDBr/exec';
-
 const fmt = (n, decimals=2) =>
   Number(n).toLocaleString('en-US',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
 
@@ -88,6 +106,15 @@ async function cargarDatos(){
     document.getElementById("d_efectivo").textContent = fmt(d.efectivo_usd*1.05);
     document.getElementById("d_zelle").textContent = fmt(d.zelle_usd*1.07);
     document.getElementById("d_bs").textContent = fmt(d.bs/990);
+
+    document.getElementById("arb_abierto").textContent = fmt(d.capital_abierto);
+    document.getElementById("arb_fin").textContent = fmt(d.financiamiento);
+    document.getElementById("arb_gain").textContent = fmt(d.ganancia_realizada);
+    document.getElementById("arb_sold").textContent = fmt(d.usdt_vendidos);
+    document.getElementById("arb_bought").textContent = fmt(d.usdt_recomprados);
+    document.getElementById("arb_volume").textContent = fmt(d.volumen_usdt);
+    document.getElementById("arb_spread_clp").textContent = fmt(d.spread_clp);
+    document.getElementById("arb_spread_bs").textContent = fmt(d.spread_bs);
 
     document.getElementById("status").textContent =
       "Actualizado: " + new Date().toLocaleTimeString('es-CL');
